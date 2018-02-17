@@ -7,11 +7,15 @@ Usage
 The xmlValidator creates a copy of the xml file to validate in a temporary directory. The copy has the CfgCVS structure that the HCALFM is used to seeing; i.e. if your xml file is called `my_xml_file.xml`, creates a copy with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location.
 
 To validate an xml file,
-```java -jar hcalfmXMLvalidator.jar my_xml_file.xml```
+```
+java -jar hcalfmXMLvalidator.jar my_xml_file.xml
+```
 
 
 To specify that the temporary directory should be somewhere else besides `/tmp`,
-```java -jar hcalfmXMLvalidator.jar my_xml_file.xml my_tmp_directory```
+```
+java -jar hcalfmXMLvalidator.jar my_xml_file.xml my_tmp_directory
+```
 
 
 Getting and Compiling
