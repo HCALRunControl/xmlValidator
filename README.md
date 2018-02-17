@@ -28,6 +28,6 @@ ant
 ```
 The executable jar file will appear in the `jars` directory. It should be able to run on any machine that has java installed.
 
-Note that it should always be compiled against the FM code if the relevant FM code changes.
+Note that it should always be recompiled against the FM code if/when the relevant FM code changes.
 
 Note also that currently it needs to be built against the branch `refactorXML` in the HCALFM repository (until it gets merged).
