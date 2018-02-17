@@ -21,10 +21,7 @@ public class xmlValidator {
   /**
    * class to use the HCALxmlHandler for validating xml files
    */
-  public xmlValidator() {
-    // TODO Auto-generated constructor stub
-
-  }
+  public xmlValidator() {}
 
   private static String getXMLtype(Path path) throws IOException {
     final Scanner scanner = new Scanner(path);
@@ -79,7 +76,6 @@ public class xmlValidator {
       xmlHandler.parseMasterSnippet(fileName, enclosingDir);
     }
     catch (UserActionException e) {
-      // TODO Auto-generated catch block
       System.out.println("failure:");
       e.printStackTrace();
       throw new Exception("HCALxmlHandler failed at parsing the mastersnippet.");
@@ -98,7 +94,6 @@ public class xmlValidator {
       xmlHandler.parseHCALuserXML(HCALxmlHandler.readFile(path.toString(), Charset.defaultCharset()));
     }
     catch (UserActionException e) {
-      // TODO Auto-generated catch block
       System.out.println("failure:");
       e.printStackTrace();
       throw new Exception("HCALxmlHandler failed at parsing the mastersnippet.");
@@ -109,7 +104,6 @@ public class xmlValidator {
    * @param args: two arguments, the xml to validate and the temporary directory to put it in
    */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
     String tempDir = "/tmp";
     if (args.length > 2 || args.length < 1) {
       System.out.println("Usage:");
@@ -144,7 +138,6 @@ public class xmlValidator {
         System.out.println(args[0] + " passes validation.");
       }
       catch (Exception e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
         System.exit(1);
       }
