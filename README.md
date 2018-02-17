@@ -21,7 +21,8 @@ java -jar hcalfmXMLvalidator.jar my_xml_file.xml my_tmp_directory
 Getting and Compiling
 ---------------------
 On a machine where RCMS and the HCALFM are installed,
-```git clone git@github.com:HCALRunControl/xmlValidator.git
+```
+git clone git@github.com:HCALRunControl/xmlValidator.git
 cd xmlValidator
 ant
 ```
