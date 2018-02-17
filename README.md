@@ -4,7 +4,9 @@ Validates master and grandmaster snippets by using the parsing code of the [HCAL
 
 Usage
 -----
-The xmlValidator creates a copy of the xml file to validate in a temporary directory. The copy has the CfgCVS structure that the HCALFM is used to seeing; i.e. if your xml file is called `my_xml_file.xml`, creates a copy with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location.
+The xmlValidator can parse either master or grandmaster snippets intended for the HCALFM. In the case of master snippets, it creates a copy of the xml file to validate in a temporary directory. For grandmaster snippets, it is does not need to make such a copy.
+
+When parsing a master snippet, this script creates the CfgCVS structure for master snippets that the HCALFM is used to seeing; i.e. if your master snippet is called `my_xml_file.xml`, this script will create a copy of it with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location.
 
 To validate an xml file,
 ```
