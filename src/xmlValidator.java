@@ -1,6 +1,3 @@
-/**
- * 
- */
 package hcalfmXMLvalidator;
 
 import java.io.IOException;
