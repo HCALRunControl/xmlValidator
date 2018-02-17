@@ -26,7 +26,7 @@ git clone git@github.com:HCALRunControl/xmlValidator.git
 cd xmlValidator
 ant
 ```
-The executable jar file will appear in the `jars` directory. It should be able to run on any machine that has java installed.
+The executable jar file will appear in the `jars` directory. It should be able to run on any machine that has Java installed.
 
 Note that it should always be recompiled against the FM code if/when the relevant FM code changes.
 
