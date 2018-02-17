@@ -1,106 +1,110 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="jar" name="hcalfmXMLvalidator">
-    <property environment="env"/>
 
-	  <property file="../../tomcat/webapps/rcms/WEB-INF/conf/RCMS.properties" />
-	  <property name="rcms.webapp" value="${rcms.framework}/rcms" />
-	  <property name="rcms.classes" value="${rcms.webapp}/WEB-INF/classes" />
-	  <property name="rcms.libs" value="${rcms.webapp}/WEB-INF/lib" />
-	  <property name="rcms.src" value="${rcms.webapp}/WEB-INF/src" />
-  	<property name="hcalfmXMLvalidator.classes" value="classes" />
-  	<property name="hcalfmXMLvalidator.jar" value="hcalfmXMLvalidator.jar" />
+  <property environment="env"/>
+  <property file="../../tomcat/webapps/rcms/WEB-INF/conf/RCMS.properties"/>
+  <property name="rcms.webapp" value="${rcms.framework}/rcms"/>
+  <property name="rcms.classes" value="${rcms.webapp}/WEB-INF/classes"/>
+  <property name="rcms.libs" value="${rcms.webapp}/WEB-INF/lib"/>
+  <property name="rcms.src" value="${rcms.webapp}/WEB-INF/src"/>
+  <property name="hcalfmXMLvalidator.classes" value="classes"/>
+  <property name="hcalfmXMLvalidator.jar" value="hcalfmXMLvalidator.jar"/>
 
-	  <!-- TODO: 
-	       once the HCALFM refactorXML branch gets merged in and deployed on the build machine
+  <!-- TODO: 
+         once the HCALFM refactorXML branch gets merged in and deployed on the build machine
          we can use the "official" HCALFM.jar that lives in ~daqowner/tomcat/webapps/ROOT/functionmanagers like so:
     -->
-    <!--
+  <!--
     <property name="levelOneHCALFM.location" value="../../tomcat/webapps/ROOT/functionmanagers"/>
     -->
-    <property name="levelOneHCALFM.location" value="../levelOneHCALFM/installation/jars/"/>
+  <property name="levelOneHCALFM.location" value="../levelOneHCALFM/installation/jars/"/>
+  <property name="debuglevel" value="source,lines,vars"/>
+  <property name="target" value="1.8"/>
+  <property name="source" value="1.8"/>
 
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.8"/>
-    <property name="source" value="1.8"/>
-    <!--<path id="JUnit 4.libraryclasspath">
+  <!--<path id="JUnit 4.libraryclasspath">
         <pathelement location="${ECLIPSE_HOME}plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
         <pathelement location="${ECLIPSE_HOME}plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
     </path>-->
-	  <path id="rcms.classpath">
-	  		<fileset dir="${rcms.libs}">
-	  			<include name="*.jar"/>
-	  		</fileset>
-	  	<pathelement location="${rcms.classes}"/>
-	  </path>
-	  <path id="levelOneHCALFM.classpath">
-	  		<fileset dir="${levelOneHCALFM.location}">
-	  			<!-- TODO: pending HCALFM refactorXML: 
+
+  <path id="rcms.classpath">
+    <fileset dir="${rcms.libs}">
+      <include name="*.jar"/>
+    </fileset>
+    <pathelement location="${rcms.classes}"/>
+  </path>
+
+  <path id="levelOneHCALFM.classpath">
+    <fileset dir="${levelOneHCALFM.location}">
+      <!-- TODO: pending HCALFM refactorXML: 
                use "official" HCALFM.jar ~daqowner/tomcat/webapps/ROOT/functionmanagers:
           -->
-          <!-- replace next line with
-	  			<include name="HCALFM.jar"/>
+      <!-- replace next line with
+          <include name="HCALFM.jar"/>
           -->
-	  			<include name="HCALFM_02-16-18_v1.jar"/>
-	  		</fileset>
-	  	<pathelement location="${rcms.classes}"/>
-	  </path>
-    <path id="hcalfmXMLvalidator.classpath">
-        <pathelement location="jars"/>
-        <path refid="rcms.classpath"/>
-        <path refid="levelOneHCALFM.classpath"/>
-    </path>
-    <target name="init">
-        <mkdir dir="${hcalfmXMLvalidator.classes}"/>
-        <copy includeemptydirs="false" todir="${hcalfmXMLvalidator.classes}">
-            <fileset dir="src">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-        <mkdir dir="jars"/>
-    </target>
-    <target depends="init" name="compile">
-        <echo message="compiling ${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="classes" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="hcalfmXMLvalidator.classpath"/>
-        </javac>
-    </target>
-	  <target name="jar" depends="init, compile">
-        <echo message="making jar for ${ant.project.name}"/>
-        <jar file="${hcalfmXMLvalidator.jar}">
-            <fileset dir="${hcalfmXMLvalidator.classes}" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserActionException.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/Parameter*.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/FunctionManagerParameter*.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/type/ParameterType.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/type/*.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserFunctionManager.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserStateMachineDefinition.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserActions.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserEventHandler.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserErrorHandler.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/EventHandler.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/EventPriority.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/FunctionManagerException.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/util/error/SentinelNotifierCommunicationException.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/resource/qualifiedresource/*.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/resource/*.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/util/logger/RCMSLogger.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/util/logger/NDCInfo.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/resourceservice/db/resource/xdaq/*.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/resourceservice/db/resource/*" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/statemachine/StateChangedListener.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/statemachine/TransitionFailureListener.class" />
-            <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/util/logsession/LogSessionException.class" />
-            <zipgroupfileset dir="../RunControl/framework/rcms/WEB-INF/lib/" includes="log4j-1.2.11.jar" />
-            <fileset dir="../levelOneHCALFM/classes/" includes="rcms/fm/app/level1/*.class" />
-               
-            
-            <manifest>
-               <attribute name="Main-Class" value="hcalfmXMLvalidator.xmlValidator"/>
-               <attribute name="Class-Path" value="hcalfmXMLvalidator"/>
-            </manifest>
-        </jar>
-	  </target>
-</project>
+      <include name="HCALFM_02-16-18_v1.jar"/>
+    </fileset>
+    <pathelement location="${rcms.classes}"/>
+  </path>
 
+  <path id="hcalfmXMLvalidator.classpath">
+    <pathelement location="jars"/>
+    <path refid="rcms.classpath"/>
+    <path refid="levelOneHCALFM.classpath"/>
+  </path>
+
+  <target name="init">
+    <mkdir dir="${hcalfmXMLvalidator.classes}"/>
+    <copy includeemptydirs="false" todir="${hcalfmXMLvalidator.classes}">
+      <fileset dir="src">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <mkdir dir="jars"/>
+  </target>
+
+  <target depends="init" name="compile">
+    <echo message="compiling ${ant.project.name}: ${ant.file}"/>
+    <javac debug="true" debuglevel="${debuglevel}" destdir="classes" includeantruntime="false" source="${source}" target="${target}">
+      <src path="src"/>
+      <classpath refid="hcalfmXMLvalidator.classpath"/>
+    </javac>
+  </target>
+
+  <target name="jar" depends="init, compile">
+    <echo message="making jar for ${ant.project.name}"/>
+    <jar file="${hcalfmXMLvalidator.jar}">
+      <fileset dir="${hcalfmXMLvalidator.classes}"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserActionException.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/Parameter*.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/FunctionManagerParameter*.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/type/ParameterType.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/parameter/type/*.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserFunctionManager.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserStateMachineDefinition.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserActions.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserEventHandler.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/user/UserErrorHandler.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/EventHandler.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/EventPriority.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/fw/FunctionManagerException.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/util/error/SentinelNotifierCommunicationException.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/resource/qualifiedresource/*.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/fm/resource/*.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/util/logger/RCMSLogger.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/util/logger/NDCInfo.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/resourceservice/db/resource/xdaq/*.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/resourceservice/db/resource/*"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/statemachine/StateChangedListener.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/statemachine/TransitionFailureListener.class"/>
+      <fileset dir="../RunControl/framework/rcms/WEB-INF/classes/" includes="rcms/util/logsession/LogSessionException.class"/>
+      <zipgroupfileset dir="../RunControl/framework/rcms/WEB-INF/lib/" includes="log4j-1.2.11.jar"/>
+      <fileset dir="../levelOneHCALFM/classes/" includes="rcms/fm/app/level1/*.class"/>
+      <manifest>
+        <attribute name="Main-Class" value="hcalfmXMLvalidator.xmlValidator"/>
+        <attribute name="Class-Path" value="hcalfmXMLvalidator"/>
+      </manifest>
+    </jar>
+  </target>
+
+</project>
