@@ -24,6 +24,7 @@ Getting and Compiling
 ---------------------
 On a machine where RCMS and the HCALFM are installed,
 ```
+cd /home/daqowner/TriDAS
 git clone git@github.com:HCALRunControl/xmlValidator.git
 cd xmlValidator
 ant
