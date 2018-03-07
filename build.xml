@@ -37,7 +37,7 @@
       <!-- replace next line with
           <include name="HCALFM.jar"/>
           -->
-      <include name="HCALFM_02-16-18_v1.jar"/>
+      <include name="HCALFM_18_1_0.jar"/>
     </fileset>
     <pathelement location="${rcms.classes}"/>
   </path>
