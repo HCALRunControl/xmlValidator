@@ -6,9 +6,18 @@ Usage
 -----
 The xmlValidator can parse either master or grandmaster snippets intended for the HCALFM. In the case of master snippets, it creates a copy of the xml file to validate in a temporary directory. For grandmaster snippets, it is does not need to make such a copy.
 
-When parsing a master snippet, this script creates the CfgCVS structure for master snippets that the HCALFM is used to seeing; i.e. if your master snippet is called `my_xml_file.xml`, this script will create a copy of it with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location.
+When parsing a master snippet, this script creates the CfgCVS structure for master snippets that the HCALFM is used to seeing; i.e. if your master snippet is called `my_xml_file.xml`, this script will create a copy of it with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location (see the Advanced Usage section below.)
 
 To validate an xml file,
+```
+./xmlValidate.sh my_xml_file.xml
+```
+
+
+Advanced Usage
+--------------
+
+You can also validate an xml file like this:
 ```
 java -jar hcalfmXMLvalidator.jar my_xml_file.xml
 ```
