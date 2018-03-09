@@ -8,7 +8,6 @@
   <property name="rcms.libs" value="${rcms.webapp}/WEB-INF/lib"/>
   <property name="rcms.src" value="${rcms.webapp}/WEB-INF/src"/>
   <property name="hcalfmXMLvalidator.classes" value="classes"/>
-  <property name="hcalfmXMLvalidator.jar" value="hcalfmXMLvalidator.jar"/>
 
   <!-- TODO: 
          once the HCALFM refactorXML branch gets merged in and deployed on the build machine
@@ -18,6 +17,8 @@
     <property name="levelOneHCALFM.location" value="../../tomcat/webapps/ROOT/functionmanagers"/>
     -->
   <property name="levelOneHCALFM.location" value="/home/daqowner/tomcat/webapps/ROOT/functionmanagers"/>
+  <property name="outJarDir" value="./jars"/>
+  <property name="hcalfmXMLvalidator.jar" value="${outJarDir}/hcalfmXMLvalidator.jar"/>
   <property name="debuglevel" value="source,lines,vars"/>
   <property name="target" value="1.8"/>
   <property name="source" value="1.8"/>
@@ -43,7 +44,7 @@
   </path>
 
   <path id="hcalfmXMLvalidator.classpath">
-    <pathelement location="jars"/>
+    <pathelement location="${outJarDir}"/>
     <path refid="rcms.classpath"/>
     <path refid="levelOneHCALFM.classpath"/>
   </path>
@@ -55,7 +56,7 @@
         <exclude name="**/*.java"/>
       </fileset>
     </copy>
-    <mkdir dir="jars"/>
+    <mkdir dir="${outJarDir}"/>
   </target>
 
   <target depends="init" name="compile">

@@ -96,7 +96,7 @@ public class xmlValidator {
     catch (UserActionException e) {
       System.out.println("failure:");
       e.printStackTrace();
-      throw new Exception("HCALxmlHandler failed at parsing the mastersnippet.");
+      throw new Exception("HCALxmlHandler failed at parsing the grandmaster.");
     }
   }
 

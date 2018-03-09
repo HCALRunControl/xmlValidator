@@ -4,9 +4,20 @@ Validates master and grandmaster snippets by using the parsing code of the [HCAL
 
 Usage
 -----
-The xmlValidator creates a copy of the xml file to validate in a temporary directory. The copy has the CfgCVS structure that the HCALFM is used to seeing; i.e. if your xml file is called `my_xml_file.xml`, creates a copy with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location.
+The xmlValidator can parse either master or grandmaster snippets intended for the HCALFM. In the case of master snippets, it creates a copy of the xml file to validate in a temporary directory. For grandmaster snippets, it is does not need to make such a copy.
+
+When parsing a master snippet, this script creates the CfgCVS structure for master snippets that the HCALFM is used to seeing; i.e. if your master snippet is called `my_xml_file.xml`, this script will create a copy of it with the structure `my_xml_file.xml/pro`. By default, this copy will be made in the `/tmp` directory, but you can specify a different location (see the Advanced Usage section below.)
 
 To validate an xml file,
+```
+./xmlValidate.sh my_xml_file.xml
+```
+
+
+Advanced Usage
+--------------
+
+You can also validate an xml file like this:
 ```
 java -jar hcalfmXMLvalidator.jar my_xml_file.xml
 ```
@@ -21,12 +32,12 @@ java -jar hcalfmXMLvalidator.jar my_xml_file.xml my_tmp_directory
 Getting and Compiling
 ---------------------
 On a machine where RCMS and the HCALFM are installed,
-```git clone git@github.com:HCALRunControl/xmlValidator.git
+```
+cd /home/daqowner/TriDAS
+git clone git@github.com:HCALRunControl/xmlValidator.git
 cd xmlValidator
 ant
 ```
-The executable jar file will appear in the `jars` directory. It should be able to run on any machine that has java installed.
+The executable jar file will appear in the `jars` directory. It should be able to run on any machine that has Java installed.
 
-Note that it should always be recompiled against the up-to-date FM code.
-
-Note also that currently it needs to be built against the branch `refactorXML` in the HCALFM repository (until it gets merged).
+Note that it should always be recompiled against the FM code if/when the relevant FM code changes. To update the HCALFM jar that the xmlValidator gets built against, it must be changed in [line 41 of build.xml](https://github.com/HCALRunControl/xmlValidator/blob/master/build.xml#L41).
