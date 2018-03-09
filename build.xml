@@ -17,7 +17,7 @@
   <!--
     <property name="levelOneHCALFM.location" value="../../tomcat/webapps/ROOT/functionmanagers"/>
     -->
-  <property name="levelOneHCALFM.location" value="../levelOneHCALFM/installation/jars/"/>
+  <property name="levelOneHCALFM.location" value="/home/daqowner/tomcat/webapps/ROOT/functionmanagers"/>
   <property name="debuglevel" value="source,lines,vars"/>
   <property name="target" value="1.8"/>
   <property name="source" value="1.8"/>
@@ -37,7 +37,7 @@
       <!-- replace next line with
           <include name="HCALFM.jar"/>
           -->
-      <include name="HCALFM_02-16-18_v1.jar"/>
+      <include name="HCALFM.jar"/>
     </fileset>
     <pathelement location="${rcms.classes}"/>
   </path>

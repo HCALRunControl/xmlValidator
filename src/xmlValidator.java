@@ -91,7 +91,7 @@ public class xmlValidator {
     Path path = Paths.get(inputFile);
     HCALxmlHandler xmlHandler = new HCALxmlHandler(new HCALFunctionManager());
     try {
-      xmlHandler.parseHCALuserXML(HCALxmlHandler.readFile(path.toString(), Charset.defaultCharset()));
+      xmlHandler.parseGrandmaster(HCALxmlHandler.readFile(path.toString(), Charset.defaultCharset()));
     }
     catch (UserActionException e) {
       System.out.println("failure:");
